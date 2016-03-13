@@ -40,12 +40,12 @@ Configuration options, which is set up in YAML format:
 - `env`: environment name
 - `name`: name of project (`$NAME`)
 - `web`: web configuration
-	- `url`: URL to serve to
+	- `url`: URL to serve to *
 	- `static`: relative URL to serve static files to
-	- `https`: serve with https or not (`yes` or `no`)*
+	- `https`: serve with https or not (`yes` or `no`) *
 	- `gzip`: compress responses with gzip or not
 	- `protocol`: protocol to serve from (`"https://"` or `"http://"`)
-	- `cloudflare`: proxy requests through CloudFlare first*
+	- `cloudflare`: proxy requests through CloudFlare first *
 	- `static_error_pages`: serve error pages through NginX or not
 - `app`: app configuration
 	- `secret_key`: secret key for using secure cookies
@@ -59,3 +59,14 @@ Configuration options, which is set up in YAML format:
 - `server`: specific server configuration
 	- `ufw`: enable UFW firewall or not
 	- `swap`: amount of memory swap to install
+
+`*` = this requires additional configuration (DNS, CloudFlare, HTTPS certificates, etc.)
+that the provisioning script does not manage.
+
+### Running
+Once you have [`Vagrant`](https://vagrantup.com) installed, change into `setup/server` directory
+and running `ENV=development vagrant up` to create a development server (hosted locally)
+or `ENV=production AWS_KEY=$AWS_KEY AWS_SECRET=$AWS_SECRET vagrant up --provider=aws`
+to create a production server (hosted on AWS).
+Note: make sure to replace `$AWS_KEY` with your actual AWS key, and `$AWS_SECRET` with your
+AWS secret.
